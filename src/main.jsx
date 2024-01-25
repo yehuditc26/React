@@ -3,18 +3,13 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Outlet, Route, Router, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
-import Login from './Routes/Admin/Login.jsx'
-import Admin from './Routes/Admin/Admin.jsx'
-import ErrorLogin from './components/Admin/ErrorLogin.jsx'
-// import 
+import Admin from './components/Admin/AdminHome.jsx'
+import BusinessDetails from './components/BusinessData/BusinessDetails.jsx'
+
+
 
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <Login/>,
-  //   errorElement: <><div><h1>Error Page</h1></div><h3>404 NOT FOUND</h3></>
-  // },
   {
     path: '/admin',
     element:<Admin/>,
@@ -39,30 +34,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    // element:<ErrorLogin /> ,
-    element:<Admin/>,
-    // element: <App />
+    // element:<Admin/>,
+    element:<BusinessDetails/>,
   },
-  // {
-  //   path: '/services',
-  //   //element: <StudentsList />,
-  //   children: [
-  //     {
-  //       path: 'add',
-  //      // element: <AddStudent />
-  //     },
-  //     {
-  //       path: ':id',
-  //    //   element: <Student />,
-  //       errorElement:<div>no student</div>
-  //     }
-  //   ]
-  // }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-    {/* <App /> */}
   </React.StrictMode>,
 )

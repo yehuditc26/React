@@ -1,21 +1,42 @@
+// import axios from 'axios';
+// import AppStore from './AppStore';
+
+// export async function login(name, password) {
+//     console.log(0)
+//     const res = await axios.post('http://localhost:8787/login', { name, password });
+//     console.log(res)
+//     if (res.status === 200) {
+//         AppStore.setIsLogin(true)
+//         return 'success';
+//     }
+
+//     else {
+//         if (res.status === 401)
+//             console.log(res.status)
+//         return 'failed';
+
+//     }
+// }
 import axios from 'axios';
 import AppStore from './AppStore';
-import ErrorLogin from '../components/Admin/ErrorLogin';
 
 export async function login(name, password) {
-    const res = await axios.post('http://localhost:8787/login', { name, password });
-    console.log(res)
-    if (res.status === 200) {
-        // dataStore.addService(service);
-        console.log(res)
-        AppStore.setIsLogin(true)
-        return 'success';
-    }
-    else {
-        if(res.status === 401)
-        // <p>kfhdsk</p>
-        console.log(5)
-        return 'failed';
+    console.log(0);
+    try {
+        const res = await axios.post('http://localhost:8787/login', { name, password });
+        console.log(res);
+        if (res.status === 200) {
+            AppStore.setIsLogin(true);
+            return 'success';
+        } else {
+            console.log(res.status);
+            return 'failed';
+        }
         
+    } catch (error) {
+        console.log(error);
+        if(error.response.status===401)
+            console.log(401)
+        return 'failed';
     }
 }

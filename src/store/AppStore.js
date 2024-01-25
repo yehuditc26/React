@@ -1,6 +1,5 @@
 import { observable, makeObservable, action } from 'mobx';
-import { login } from './Server';
-import ErrorLogin from '../components/Admin/ErrorLogin';
+
 class AppStore {
     isLogin = false;
 
