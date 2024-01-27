@@ -5,7 +5,7 @@ import App from './App.jsx'
 import './index.css'
 import Admin from './components/Admin/AdminHome.jsx'
 import BusinessDetails from './components/BusinessData/BusinessDetails.jsx'
-
+import ServicesList from './components/Services/ServicesList.jsx'
 
 
 
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     // element:<Admin/>,
-    element:<BusinessDetails/>,
+    element:<ServicesList/>,
   },
 
 ]);

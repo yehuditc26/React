@@ -7,7 +7,7 @@ import {
     Typography,
     Box,
 } from "@mui/material";
-import AppStore from "../../store/AppStore";
+import AppStore from "../../store/AppStoreLogin";
 
 const BusinessDetails = () => {
     const [showAddForm, setShowAddForm] = useState(false);

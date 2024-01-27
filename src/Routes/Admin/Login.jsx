@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // import { useHistory } from "react-router-dom";
-import AppStore from "../../store/AppStore";
+import AppStore from "../../store/AppStoreLogin";
 import { login } from "../../store/Server";
 // import Admin from "./Admin";
 // import {handleLogin} from "./Admin";

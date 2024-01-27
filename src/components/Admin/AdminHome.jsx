@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react"
 
-import AppStore from "../../store/AppStore";
+import AppStore from "../../store/AppStoreLogin";
 import Login from "./Login";
 import { login } from "../../store/Server";
 import BusinessDetails from "../BusinessData/BusinessDetails";

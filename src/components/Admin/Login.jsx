@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Button, TextField, Alert, AlertTitle } from '@mui/material';
-import AppStore from "../../store/AppStore";
+import AppStore from "../../store/AppStoreLogin";
 import { login } from "../../store/Server";
 
 const Login = () => {
