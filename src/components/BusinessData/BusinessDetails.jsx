@@ -123,7 +123,7 @@ const BusinessDetails = () => {
             ) : (
                 AppStore.isLogin && (
                     <Button variant="contained" onClick={handleEdit}>
-                        Edit
+                        עריכה
                     </Button>
                 )
             )}

@@ -6,23 +6,25 @@ import './index.css'
 import Admin from './components/Admin/AdminHome.jsx'
 import BusinessDetails from './components/BusinessData/BusinessDetails.jsx'
 import ServicesList from './components/Services/ServicesList.jsx'
+import AddServices from './components/Services/AddService.jsx'
+import AddMeeting from './components/Meetings/AddMeeting.jsx'
 
 
 
 const router = createBrowserRouter([
   {
     path: '/admin',
-    element:<Admin/>,
+    element: <Admin />,
     errorElement: <div>404 page not found:(</div>,
     children: [
       {
         path: '',
         element: <div>empty</div>,
-         errorElement: <div>error contant not found</div>
+        errorElement: <div>error contant not found</div>
       },
       {
         path: 'services',
-        element: <div>services</div>,
+        element: <ServicesList />,
         errorElement: <div>error contant not found</div>
       },
       {
@@ -34,8 +36,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    // element:<Admin/>,
-    element:<ServicesList/>,
+    element: <>
+      {/* <BusinessDetails /> */}
+      <ServicesList />
+      <AddServices />
+      <AddMeeting/>
+    </>
   },
 
 ]);

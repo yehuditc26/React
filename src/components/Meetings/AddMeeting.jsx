@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box } from "@mui/material";
-import { addService } from "../../store/Server";
+import { addMeeting } from "../../store/Server";
 import { observer } from 'mobx-react';
 
 
 
-const AddServices = (observer(() => {
+const AddMeeting = (observer(() => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
@@ -13,7 +13,7 @@ const AddServices = (observer(() => {
   const handleAddService = async () => {
     if (name && description) {
       const newService = { name, description };
-      const addServiceResult = await addService(newService);
+      const addServiceResult = await addMeeting(newService);
       console.log(addServiceResult);
       if (addServiceResult === "failed") {
         // setValid(false)
@@ -38,7 +38,7 @@ const AddServices = (observer(() => {
     <div dir="rtl">
       {!showAddForm ? (
         <Button variant="contained" color="primary" onClick={handleButtonClick}>
-          הוסף שרות        </Button>
+          הוסף פגישה        </Button>
       ) : (
         <div>
           <TextField
@@ -68,6 +68,6 @@ const AddServices = (observer(() => {
   );
 }))
 
-export default AddServices;
+export default AddMeeting;
 
 

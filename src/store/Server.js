@@ -2,7 +2,9 @@
 import axios from 'axios';
 import AppStore from './AppStoreLogin';
 import AppStoreService from './AppStoreService';
+import AppStoreMeeting from './AppStoreMeeting';
 
+//login
 export async function login(name, password) {
     // console.log(0);
     try {
@@ -24,6 +26,7 @@ export async function login(name, password) {
     }
 }
 
+//services
 export async function addService(service) {
     // console.log("service: ",service);
     try {
@@ -52,6 +55,49 @@ export async function getServices() {
         if (res.status === 200) {
             const services = res.data
             AppStoreService.getService(services)
+            return 'success';
+        }
+
+    } catch (error) {
+        console.log("res: ",error);
+        if (error.status === 401)
+            console.log(401)
+        else {
+            console.log(error.status)
+        }
+        return 'failed';
+    }
+}
+
+//meetings
+export async function addMeeting(meeting) {
+    // console.log("service: ",service);
+    try {
+        const res = await axios.post('http://localhost:8787/appointment',meeting);
+        // console.log(res);
+        if (res.status === 200) {
+            AppStoreMeeting.setMeeting(meeting)
+            return 'success';
+        }
+
+    } catch (error) {
+        console.log("res: ",error);
+        if (error.status === 401)
+            console.log(401)
+        else {
+            console.log(error.status)
+        }
+        return 'failed';
+    }
+}
+
+export async function getMeeting() {
+    try {
+        const res = await axios.get('http://localhost:8787/appointments');
+        console.log(res.data);
+        if (res.status === 200) {
+            const services = res.data
+            AppStoreService.getMeeting(meeting)
             return 'success';
         }
 

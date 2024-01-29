@@ -1,26 +1,21 @@
-
 import React, { useState, useEffect } from "react";
-import AddService from "./AddService";
-import {
-  Button,
-  TextField,
-  Typography,
-  Box,
-} from "@mui/material";
-import AddServices from "./AddService";
 import AppStoreService from "../../store/AppStoreService";
+import { observer } from "mobx-react";
 
 
-const ServicesList = () => {
+const ServicesList = (observer(() => {
+
   const [showAddForm, setShowAddForm] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
-
-  const handleAddService = (newService) => {
-    setShowAddForm(false);
+  const handleAddFormOpen = (service) => {
+    setShowAddForm(true);
+    setSelectedService(service);
   };
 
-  const handleButtonClick = () => {
-    setShowAddForm(true);
+  const handleAddFormClose = () => {
+    setShowAddForm(false);
+    setSelectedService(null);
   };
 
   console.log(AppStoreService.services);
@@ -34,6 +29,7 @@ const ServicesList = () => {
           {AppStoreService.services.map((service, index) => (
             <li key={index}>
               <strong>{service.name}</strong> - {service.description}
+              <button onClick={() => handleAddFormOpen(service)}>Open Form X</button>
             </li>
           )
           )
@@ -43,17 +39,16 @@ const ServicesList = () => {
         <p>עדין לא הוספת שרותים לרשימה </p>
       )}
 
-      <div>
-        {!showAddForm ? (
-          <Button variant="contained" color="primary" onClick={handleButtonClick}>
-            הוסף שרות
-          </Button>
-        ) : (
-          <div>{showAddForm && <AddService onAddService={handleAddService} />}</div>
-        )}
-      </div>
+      {showAddForm && (
+        <div>
+          {/* Render your form X component here */}
+          {/* Pass the selectedService and handleAddFormClose as props */}
+        </div>
+      )}
+
+
     </div>
   );
-}
+}))
 
 export default ServicesList;
