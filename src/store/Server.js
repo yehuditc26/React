@@ -96,8 +96,8 @@ export async function getMeeting() {
         const res = await axios.get('http://localhost:8787/appointments');
         console.log(res.data);
         if (res.status === 200) {
-            const services = res.data
-            AppStoreService.getMeeting(meeting)
+            const meeting = res.data
+            AppStoreMeeting.getMeeting(meeting)
             return 'success';
         }
 

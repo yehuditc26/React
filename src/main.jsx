@@ -6,6 +6,7 @@ import './index.css'
 import Admin from './components/Admin/AdminHome.jsx'
 import BusinessDetails from './components/BusinessData/BusinessDetails.jsx'
 import ServicesList from './components/Services/ServicesList.jsx'
+import MeetingsList from './components/Meetings/MeetingsList.jsx'
 import AddServices from './components/Services/AddService.jsx'
 import AddMeeting from './components/Meetings/AddMeeting.jsx'
 
@@ -39,8 +40,10 @@ const router = createBrowserRouter([
     element: <>
       {/* <BusinessDetails /> */}
       <ServicesList />
-      <AddServices />
+      {/* <AddServices /> */}
+      <MeetingsList/>
       <AddMeeting/>
+
     </>
   },
 

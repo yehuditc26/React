@@ -23,8 +23,9 @@ class AppStoreMeeting {
         console.log("meetings:", this.meetings);
     }
 
-    setMeeting = (meetings) => {
-        this.services.push(meetings);
+    setMeeting = (meeting) => {
+        console.log("meetings:", this.meetings);
+        this.meetings.push(meeting);
         console.log("meetings:", this.meetings);
     }
 }

@@ -6,6 +6,7 @@ import Login from "./Login";
 import { login } from "../../store/Server";
 import BusinessDetails from "../BusinessData/BusinessDetails";
 import ServicesList from "../Services/ServicesList";
+import AddServices from "../Services/AddService";
 
 
 
@@ -35,6 +36,7 @@ const Admin = observer(() => {
                 <>
                     <BusinessDetails />
                     <ServicesList />
+                    <AddServices/>
                 </>
             )}
         </>
