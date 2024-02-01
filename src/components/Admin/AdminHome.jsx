@@ -7,6 +7,8 @@ import { login } from "../../store/Server";
 import BusinessDetails from "../BusinessData/BusinessDetails";
 import ServicesList from "../Services/ServicesList";
 import AddServices from "../Services/AddService";
+import MeetingsList from "../Meetings/MeetingsList";
+import AddMeeting from "../Meetings/AddMeeting";
 
 
 
@@ -30,13 +32,15 @@ const Admin = observer(() => {
 
     return (
         <>
-            {!AppStore.isLogin ? (
+            {AppStore.isLogin ? (
                 <Login />
             ) : (
                 <>
                     <BusinessDetails />
                     <ServicesList />
                     <AddServices/>
+                    <MeetingsList/>
+                    <AddMeeting/>
                 </>
             )}
         </>

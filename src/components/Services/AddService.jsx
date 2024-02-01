@@ -16,9 +16,10 @@ const AddServices = (observer(() => {
       const addServiceResult = await addService(newService);
       console.log(addServiceResult);
       if (addServiceResult === "failed") {
-        // setValid(false)
+        console.log(failed);
       }
-      // onAddService(newService);
+
+      setShowAddForm(false)
       setName("");
       setDescription("");
     }

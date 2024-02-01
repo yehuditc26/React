@@ -1,105 +1,73 @@
-// // import React, { useState, useEffect } from "react";
-// // import AppStoreMeeting from "../../store/AppStoreMeeting";
-// // import AppStoreLogin from "../../store/AppStoreLogin";
-// // import { observer } from "mobx-react";
-// // import AddMeeting from "../Meetings/AddMeeting";
-
-
-// // const MeetingsList = (observer(() => {
-
-// //   console.log(AppStoreMeeting.meetings);
-
-// //   return (
-// //     <div dir='rtl'>
-// //       <br />
-// //       <h2>פגישות</h2>
-// //       {AppStoreMeeting.meetings.length > 0 ? (
-// //         <ul>
-// //           {AppStoreMeeting.meetings.map((meeting, index) => (
-// //             <li key={index}>
-// //               <strong>{meeting.clientName}</strong> 
-// //               - {meeting.clientPhone}
-// //             </li>
-// //           )
-// //           )
-// //           }
-// //         </ul>
-// //       ) : (
-// //         <p>עדין לא הוספת פגישה לרשימה </p>
-// //       )}
-
-// //     </div>
-// //   );
-// // }))
-
-// // export default MeetingsList;
-
 // import React from "react";
-// import { observer } from "mobx-react";
-// import AppStoreMeeting from "../../store/AppStoreMeeting";
-
-// const MeetingsList = observer(() => {
-//   console.log(AppStoreMeeting.meetings);
-
-//   return (
-//     <div dir="rtl">
-//       <br />
-//       <h2>פגישות</h2>
-//       {AppStoreMeeting.meetings.length > 0 ? (
-//         <ul>
-//           {AppStoreMeeting.meetings.map((meeting, index) => (
-//             <li key={index}>
-//               <strong>{meeting.clientName}</strong> - {meeting.clientPhone}
-//               <br />
-//               <strong>Email: </strong> {meeting.clientEmail}
-//               <br />
-//               <strong>תאריך ושעה: </strong> {meeting.dateTime}
-//               <br />
-//               <strong>שם השירות: </strong> {meeting.serviceName}
-//               <br />
-//             </li>
-//           ))}
-//         </ul>
-//       ) : (
-//         <p>עדיין לא הוספת פגישה לרשימה</p>
-//       )}
-//     </div>
-//   );
-// });
-
-// export default MeetingsList;
-
-import React from "react";
 import { observer } from "mobx-react";
 import AppStoreMeeting from "../../store/AppStoreMeeting";
+import '../../App.css'
+import './Meeting.css'
+
 
 const MeetingsList = observer(() => {
-  console.log(AppStoreMeeting.meetings);
+  const currentDate = new Date(); // Get the current date
+
+  // Create a copy of the meetings array
+  const meetings = AppStoreMeeting.meetings.slice();
+
+  // Sort the meetings by date
+  const sortedMeetings = meetings.sort((a, b) => {
+    const dateA = new Date(a.dateTime);
+    const dateB = new Date(b.dateTime);
+    return dateB - dateA;
+  });
 
   return (
-    <div dir="rtl">
+    <div dir="rtl" >
       <br />
       <h2>פגישות</h2>
-      {AppStoreMeeting.meetings.length > 0 ? (
+      {sortedMeetings.length > 0 ? (
         <ul>
-          {AppStoreMeeting.meetings.map((meeting, index) => (
-            <div
-              key={index}
-              style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}
-            >
-              <strong>{meeting.clientName}</strong> - {meeting.clientPhone}
-              <br />
-              <strong>מייל: </strong> {meeting.clientEmail}
-              <br />
-              <strong>תאריך ושעה: </strong> {meeting.dateTime}
-              <br />
-              <strong>שם השירות: </strong> {meeting.serviceName}
-              <br />
-            </div>
-          ))}
+          {sortedMeetings.map((meeting, index) => {
+            const meetingDate = new Date(meeting.dateTime.split("T")[0]);
+
+            // Define the CSS class based on the meeting date
+            let frameColorClass = "";
+            if (meetingDate.toDateString() === currentDate.toDateString()) {
+              frameColorClass = "red-frame";
+            }
+
+            else if (
+              meetingDate > currentDate &&
+              meetingDate <= new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000) // Next week
+            ) {
+              frameColorClass = "orange-frame";
+            } else {
+              frameColorClass = "green-frame";
+            }
+
+            return (
+              <div className="meeting-container">
+                <div
+                  key={index}
+                  className={`meeting-frame ${frameColorClass}`}
+
+                // style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}
+                >
+                  <strong>סוג פגישה: </strong> {meeting.serviceName}
+                  <br />
+                  <strong>שם לקוח: </strong> {meeting.clientName}
+                  <br />
+                  <strong>פלאפון: </strong> {meeting.clientPhone}
+                  <br />
+                  <strong>מייל: </strong> {meeting.clientEmail}
+                  <br />
+                  <strong>תאריך: </strong> {meeting.dateTime.split("T")[0]}
+                  <br />
+                  <strong>שעה: </strong> {meeting.dateTime.split("T")[1]}
+                </div>
+              </div>
+            );
+          })}
         </ul>
       ) : (
-        <p>עדיין לא הוספת פגישה לרשימה</p>
+        <p>עדין לא הוספת פגישות לרשימה</p>
       )}
     </div>
   );

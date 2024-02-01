@@ -33,7 +33,6 @@ const ServicesList = (observer(() => {
             >
 
               <strong>{service.name}</strong> - {service.description}
-              {/* <button onClick={() => handleAddFormOpen(service)}>Open Form X</button> */}
               {/* {!AppStoreLogin.isLogin && <AddMeeting service={service.name} />} */}
 
             </div>
@@ -43,13 +42,6 @@ const ServicesList = (observer(() => {
         </ul>
       ) : (
         <p>עדין לא הוספת שרותים לרשימה </p>
-      )}
-
-      {showAddForm && (
-        <div>
-          {/* Render your form X component here */}
-          {/* Pass the selectedService and handleAddFormClose as props */}
-        </div>
       )}
 
 

@@ -16,34 +16,33 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <Admin />,
-    errorElement: <div>404 page not found:(</div>,
+    errorElement: <div>404 העמוד לא קיים:(</div>,
     children: [
       {
         path: '',
         element: <div>empty</div>,
-        errorElement: <div>error contant not found</div>
+        errorElement: <div>הניתוב לא תקין:(</div>
       },
       {
         path: 'services',
-        element: <ServicesList />,
-        errorElement: <div>error contant not found</div>
+        element: <p>שרותים</p>,
+        errorElement: <div>הניתוב לא תקין:(</div>
       },
       {
         path: 'meeting',
-        element: <div>meeting</div>,
-        errorElement: <div>error contant not found</div>
+        element: <p>פגישות</p>,
+        errorElement: <div>הניתוב לא תקין:(</div>
       }
     ]
   },
   {
     path: '/',
     element: <>
-      {/* <BusinessDetails /> */}
+      <BusinessDetails />
       <ServicesList />
       {/* <AddServices /> */}
-      <MeetingsList/>
-      <AddMeeting/>
-
+      <AddMeeting />
+      <MeetingsList />
     </>
   },
 

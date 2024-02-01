@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TextField, Typography, Box, Alert } from "@mui/material";
+import { Button, TextField, Typography, Box, Alert, Stack } from "@mui/material";
 import { addMeeting } from "../../store/Server";
 import { observer } from 'mobx-react';
 import AppStoreService from "../../store/AppStoreService";
@@ -9,10 +9,11 @@ const AddMeeting = observer(({ service }) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+
   const [showAddForm, setShowAddForm] = useState(false);
   const [valid, setValid] = useState(true);
 
-  const [selectedService, setSelectedService] = useState("");
 
   const handleServiceChange = (event) => {
     setSelectedService(event.target.value);
@@ -40,6 +41,7 @@ const AddMeeting = observer(({ service }) => {
         setName("");
         setPhone("");
         setEmail("");
+        setSelectedService("")
       }
 
       setDateTime("");
@@ -67,11 +69,6 @@ const AddMeeting = observer(({ service }) => {
         </Button>
       ) : (
         <div>
-          {/* <TextField
-            label="שרות"
-            value={service}
-            disabled
-          /> */}
           <TextField
             label="שרות"
             value={selectedService}
@@ -82,7 +79,7 @@ const AddMeeting = observer(({ service }) => {
               style: { width: "200px" }
             }}
           >
-            {/* <option value=""></option> */}
+            <option value=""></option>  
             {AppStoreService.services.map((service, index) => (
               <option key={index} value={service.name}>
                 {service.name}
