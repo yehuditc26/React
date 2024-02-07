@@ -1,7 +1,5 @@
-// import React from "react";
 import { observer } from "mobx-react";
 import AppStoreMeeting from "../../store/AppStoreMeeting";
-import '../../App.css'
 import './Meeting.css'
 
 
@@ -43,12 +41,9 @@ const MeetingsList = observer(() => {
             }
 
             return (
-              <div className="meeting-container">
+              <div key={index} className="meeting-container">
                 <div
-                  key={index}
                   className={`meeting-frame ${frameColorClass}`}
-
-                // style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}
                 >
                   <strong>סוג פגישה: </strong> {meeting.serviceName}
                   <br />

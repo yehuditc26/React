@@ -1,8 +1,8 @@
-
 import axios from 'axios';
 import AppStore from './AppStoreLogin';
 import AppStoreService from './AppStoreService';
 import AppStoreMeeting from './AppStoreMeeting';
+import AppStoreBusinessData from './AppStoreBusinessData';
 
 //login
 export async function login(name, password) {
@@ -26,11 +26,75 @@ export async function login(name, password) {
     }
 }
 
+//business details
+export async function addBusinessDetails(businessData) {
+    // console.log("service: ",service);
+    try {
+        const res = await axios.post('http://localhost:8787/businessData', businessData);
+        // console.log(res);
+        if (res.status === 200) {
+            AppStoreBusinessData.addbusinessDetails(businessData)
+            return 'success';
+        }
+
+    } catch (error) {
+        console.log("res: ", error);
+        if (error.status === 401)
+            console.log(401)
+        else {
+            console.log(error.status)
+        }
+        return 'failed';
+    }
+}
+
+export async function editBusinessDetails(businessData) {
+    // console.log("service: ",service);
+    try {
+        const res = await axios.put('http://localhost:8787/businessData', businessData);
+        // console.log(res);
+        if (res.status === 200) {
+            AppStoreBusinessData.editbusinessDetails(businessData)
+            return 'success';
+        }
+
+    } catch (error) {
+        console.log("res: ", error);
+        if (error.status === 401)
+            console.log(401)
+        else {
+            console.log(error.status)
+        }
+        return 'failed';
+    }
+}
+
+export async function getBusinessDetails() {
+    try {
+        const res = await axios.get('http://localhost:8787/businessData');
+        console.log("bs get: ",res.data);
+        if (res.status === 200) {
+            const businessData = res.data
+            AppStoreBusinessData.getbusinessDetails(businessData)
+            return 'success';
+        }
+
+    } catch (error) {
+        console.log("res: ", error);
+        if (error.status === 401)
+            console.log(401)
+        else {
+            console.log(error.status)
+        }
+        return 'failed';
+    }
+}
+
 //services
 export async function addService(service) {
     // console.log("service: ",service);
     try {
-        const res = await axios.post('http://localhost:8787/service',service);
+        const res = await axios.post('http://localhost:8787/service', service);
         // console.log(res);
         if (res.status === 200) {
             AppStoreService.setService(service)
@@ -38,7 +102,7 @@ export async function addService(service) {
         }
 
     } catch (error) {
-        console.log("res: ",error);
+        console.log("res: ", error);
         if (error.status === 401)
             console.log(401)
         else {
@@ -59,7 +123,7 @@ export async function getServices() {
         }
 
     } catch (error) {
-        console.log("res: ",error);
+        console.log("res: ", error);
         if (error.status === 401)
             console.log(401)
         else {
@@ -73,7 +137,7 @@ export async function getServices() {
 export async function addMeeting(meeting) {
     // console.log("service: ",service);
     try {
-        const res = await axios.post('http://localhost:8787/appointment',meeting);
+        const res = await axios.post('http://localhost:8787/appointment', meeting);
         // console.log(res);
         if (res.status === 200) {
             AppStoreMeeting.setMeeting(meeting)
@@ -81,7 +145,7 @@ export async function addMeeting(meeting) {
         }
 
     } catch (error) {
-        console.log("res: ",error);
+        console.log("res: ", error);
         if (error.status === 401)
             console.log(401)
         else {
@@ -102,7 +166,7 @@ export async function getMeeting() {
         }
 
     } catch (error) {
-        console.log("res: ",error);
+        console.log("res: ", error);
         if (error.status === 401)
             console.log(401)
         else {

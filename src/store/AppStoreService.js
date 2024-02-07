@@ -10,7 +10,6 @@ class AppStoreService {
             services: observable,
             setService: action,
             getService: action
-
         })
         
         getServices();
@@ -27,10 +26,6 @@ class AppStoreService {
         this.services.push(service);
         console.log("services:", this.services);
     }
-
-  
-    
-
 }
 
 export default new AppStoreService();//יצירת מופע יחיד שאליו תמיד נפנה

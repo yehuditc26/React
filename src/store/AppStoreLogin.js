@@ -6,8 +6,7 @@ class AppStoreLogin {
     constructor() {
         makeObservable(this, {
             isLogin: observable,
-            setIsLogin: action,
-            
+            setIsLogin: action,      
         })
     }
 

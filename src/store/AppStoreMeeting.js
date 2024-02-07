@@ -10,7 +10,6 @@ class AppStoreMeeting {
             meetings: observable,
             setMeeting: action,
             getMeeting: action
-
         })
         
         getMeeting();

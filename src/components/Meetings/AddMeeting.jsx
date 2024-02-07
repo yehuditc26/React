@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, TextField, Typography, Box, Alert, Stack } from "@mui/material";
-import { addMeeting } from "../../store/Server";
 import { observer } from 'mobx-react';
+import { Button, TextField, Alert } from "@mui/material";
 import AppStoreService from "../../store/AppStoreService";
+import { addMeeting } from "../../store/Server";
 
-const AddMeeting = observer(({ service }) => {
+const AddMeeting = observer(() => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -36,7 +36,6 @@ const AddMeeting = observer(({ service }) => {
       }
 
       else {
-
         setShowAddForm(false);
         setName("");
         setPhone("");
@@ -79,7 +78,7 @@ const AddMeeting = observer(({ service }) => {
               style: { width: "200px" }
             }}
           >
-            <option value=""></option>  
+            <option value=""></option>
             {AppStoreService.services.map((service, index) => (
               <option key={index} value={service.name}>
                 {service.name}
@@ -119,10 +118,10 @@ const AddMeeting = observer(({ service }) => {
             </Alert>
           }
           <Button variant="contained" color="secondary" onClick={handleCancel}>
-            לבטל
+            ביטול
           </Button>
           <Button variant="contained" color="primary" onClick={handleAddService}>
-            הוסף פגישה
+            שמירה
           </Button>
         </div>
       )}

@@ -1,39 +1,58 @@
-
-import React, { useState } from "react";
-// import AddService from "./AddService";
-import {
-    Button,
-    TextField,
-    Typography,
-    Box,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, TextField, Typography, Box, } from "@mui/material";
 import AppStore from "../../store/AppStoreLogin";
+import AppStoreBusinessData from "../../store/AppStoreBusinessData";
+import { addBusinessDetails } from "../../store/Server";
+import { getBusinessDetails } from "../../store/Server";
 
 const BusinessDetails = () => {
-    const [showAddForm, setShowAddForm] = useState(false);
-    const [services, setServices] = useState([]);
-    const [name, setName] = useState("My Business");
-    const [address, setAddress] = useState("123 Main Street");
-    const [email, setEmail] = useState("info@mybusiness.com");
-    const [phone, setPhone] = useState("555-1234");
+
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [isEditing, setIsEditing] = useState(false);
 
-    const handleAddService = (newService) => {
-        setServices([...services, newService]);
-        setShowAddForm(false);
-    };
-
-    const handleButtonClick = () => {
-        setShowAddForm(true);
-    };
+    useEffect(() => {
+        async function fetchData() {
+            const businessDetails = await getBusinessDetails();
+            const Data = AppStoreBusinessData.businessData
+            console.log(businessDetails);
+            setName(Data.Name);
+            setAddress(Data.Address);
+            setEmail(Data.Email);
+            setPhone(Data.Phone);
+        }
+        fetchData();
+    }, []);
 
     const handleEdit = () => {
         setIsEditing(true);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setIsEditing(false);
-        // Perform save logic here, e.g. send the updated details to an API
+
+        if (name && phone && email && address) {
+            const newMeeting = {
+                Name: name,
+                Phone: phone,
+                Email: email,
+                Address: address
+            };
+            const addBusinessDetailsResult = await addBusinessDetails(newMeeting);
+            console.log(addBusinessDetailsResult);
+            if (addBusinessDetailsResult === "failed") {
+                console.log('fail')
+            }
+
+            else {
+                console.log('success')
+
+            }
+        }
+
+
     };
 
     const handleInputChange = (e) => {
@@ -60,6 +79,24 @@ const BusinessDetails = () => {
     return (
         <div dir='rtl'>
             <h2>פרטי העסק</h2>
+            <Box mb={2}>
+                <Typography variant="subtitle1" component="span">
+                    שם:{" "}
+                </Typography>
+                {isEditing ? (
+                    <TextField
+                        variant="outlined"
+                        size="small"
+                        name="name"
+                        value={name}
+                        onChange={handleInputChange}
+                    />
+                ) : (
+                    <Typography variant="body1" component="span">
+                        {name}
+                    </Typography>
+                )}
+            </Box>
             <Box mb={2}>
                 <Typography variant="subtitle1" component="span">
                     כתובת:{" "}
@@ -118,7 +155,7 @@ const BusinessDetails = () => {
             </Box>
             {isEditing ? (
                 <Button variant="contained" onClick={handleSave}>
-                    Save
+                    שמירה
                 </Button>
             ) : (
                 AppStore.isLogin && (
@@ -128,7 +165,7 @@ const BusinessDetails = () => {
                 )
             )}
 
-        </div>
+        </div >
     );
 };
 

@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
-import { Button, TextField, Alert, AlertTitle } from '@mui/material';
-import AppStore from "../../store/AppStoreLogin";
+import { Button, TextField, Alert } from '@mui/material';
 import { login } from "../../store/Server";
 
 const Login = () => {
@@ -25,12 +24,10 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     const isValid = await login(username, password);
-    console.log(isValid)
+
     if (isValid == 'failed') {
       setValid(false)
     }
-    
-
   };
 
   return (

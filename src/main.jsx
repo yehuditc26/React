@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Outlet, Route, Router, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
-import App from './App.jsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './index.css'
-import Admin from './components/Admin/AdminHome.jsx'
+import './App.css'
+import AdminHome from './components/Admin/AdminHome.jsx'
 import BusinessDetails from './components/BusinessData/BusinessDetails.jsx'
 import ServicesList from './components/Services/ServicesList.jsx'
 import MeetingsList from './components/Meetings/MeetingsList.jsx'
@@ -15,22 +15,20 @@ import AddMeeting from './components/Meetings/AddMeeting.jsx'
 const router = createBrowserRouter([
   {
     path: '/admin',
-    element: <Admin />,
+    element: <AdminHome />,
     errorElement: <div>404 העמוד לא קיים:(</div>,
     children: [
       {
-        path: '',
-        element: <div>empty</div>,
-        errorElement: <div>הניתוב לא תקין:(</div>
-      },
-      {
         path: 'services',
-        element: <p>שרותים</p>,
+        element: <>
+          <ServicesList />
+          <AddServices />
+          </>,
         errorElement: <div>הניתוב לא תקין:(</div>
       },
       {
         path: 'meeting',
-        element: <p>פגישות</p>,
+        element: <MeetingsList />,
         errorElement: <div>הניתוב לא תקין:(</div>
       }
     ]
@@ -40,12 +38,10 @@ const router = createBrowserRouter([
     element: <>
       <BusinessDetails />
       <ServicesList />
-      {/* <AddServices /> */}
       <AddMeeting />
-      <MeetingsList />
-    </>
-  },
-
+      </>,
+    errorElement: <div>404 העמוד לא קיים:(</div>,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

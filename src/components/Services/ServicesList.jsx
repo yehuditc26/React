@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppStoreService from "../../store/AppStoreService";
-import AppStoreLogin from "../../store/AppStoreLogin";
 import { observer } from "mobx-react";
-import AddMeeting from "../Meetings/AddMeeting";
 
 
 const ServicesList = (observer(() => {
@@ -15,10 +13,10 @@ const ServicesList = (observer(() => {
     setSelectedService(service);
   };
 
-  const handleAddFormClose = () => {
-    setShowAddForm(false);
-    setSelectedService(null);
-  };
+  // const handleAddFormClose = () => {
+  //   setShowAddForm(false);
+  //   setSelectedService(null);
+  // };
 
   console.log(AppStoreService.services);
 
@@ -29,12 +27,9 @@ const ServicesList = (observer(() => {
       {AppStoreService.services.length > 0 ? (
         <ul>
           {AppStoreService.services.map((service, index) => (
-            <div key={index} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}
-            >
 
+            <div key={index} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
               <strong>{service.name}</strong> - {service.description}
-              {/* {!AppStoreLogin.isLogin && <AddMeeting service={service.name} />} */}
-
             </div>
           )
           )
